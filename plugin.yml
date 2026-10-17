@@ -1,0 +1,23 @@
+name: TierDuels
+version: '${project.version}'
+main: dev.tierduels.TierDuels
+api-version: '1.21'
+author: Blue
+description: 1v1 duels with an LT5 to LT1 tier ladder.
+
+commands:
+  duel:
+    description: Challenge players to duels and manage arenas
+    usage: /duel <player|accept|deny|leave|arena|reload>
+  tier:
+    description: View tiers and the leaderboard
+    usage: /tier [player|top]
+    aliases: [tiers]
+
+permissions:
+  tierduels.admin:
+    description: Manage arenas, set tiers, reload config
+    default: op
+  tierduels.bypass:
+    description: Use any command during a duel
+    default: false

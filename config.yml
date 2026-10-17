@@ -1,0 +1,149 @@
+# ==========================================
+#   TierDuels
+#   Join the queue with /duel and win duels to climb
+#   None -> LT5 -> LT4 -> LT3 -> LT2 -> LT1
+# ==========================================
+
+prefix: "&b[Duels] &r"
+
+# Wins needed to go up one tier (LT1 is the top tier)
+wins-per-tier: 3
+
+# Tier of new players: None (they reach LT5 after their first tier of wins) or LT5
+start-tier: None
+
+# Countdown before the fight starts (players are frozen)
+countdown-seconds: 5
+
+# Duel ends in a draw (no tier change) after this many seconds, 0 = no limit
+duel-time-limit-seconds: 300
+
+# Seconds between the end of a duel and teleporting the loser back
+end-delay-seconds: 3
+
+# The loser's whole inventory drops in the arena and only the winner can pick it up.
+# The winner then has loot-time-seconds to collect it and uses /duel leave when done.
+# Set loser-drops-items to false for friendly duels where nobody loses anything.
+loser-drops-items: true
+loot-time-seconds: 300
+
+# After the last win of a tier (3/3) the player waits this long before the tier-up
+promotion-delay-seconds: 5
+
+# Arena regeneration: biggest region that can be saved (in blocks) and
+# how many chunks are put back per tick (lower = less lag, slower regen)
+arena-max-blocks: 1000000
+regen-chunks-per-tick: 4
+
+# Item given by /duel wand (left click = position 1, right click = position 2)
+# For example WOODEN_AXE or STICK
+wand-material: WOODEN_AXE
+
+# Announce results / tier ups to the whole server
+broadcast-results: true
+
+# Show the tier in chat and in the tab list
+chat-prefix: true
+tab-prefix: true
+
+# Fill the empty slots of the /duel menu with glass panes
+gui-filler: true
+
+# Commands usable during a duel (players with tierduels.bypass can use everything)
+duel-allowed-commands:
+  - duel
+  - tier
+  - msg
+  - r
+
+# Players fight with their own gear (no kit). They are healed to full
+# health and food before and after a duel, and teleported back afterwards.
+
+messages:
+  no-permission: "&cYou don't have permission."
+  player-only: "&cThis command is for players only."
+  usage-duel: "&cUsage: &f/duel &7(menu) | &f/duel join &7| &f/duel cancel &7| &f/duel leave"
+  player-not-found: "&cPlayer not found."
+  you-in-duel: "&cYou are already in a duel."
+  queue-joined: "&aYou joined the duel queue. &7Waiting for an opponent..."
+  queue-already: "&cYou are already in the duel queue."
+  queue-left: "&7You left the duel queue."
+  queue-not-in: "&cYou are not in the duel queue."
+  queue-wait-arena: "&7Opponent found, waiting for a free arena..."
+  queue-broadcast-1: "&b%player% &7Searching for opponent on duel"
+  queue-broadcast-2: "&7Usage &b/duel &7for join queue"
+  gui-title: "&8Duel Queue"
+  gui-join-name: "&a&lJoin Duel"
+  gui-join-lore-1: "&7Click to search for an opponent"
+  gui-join-lore-2: "&7Players in queue: &f%count%"
+  gui-cancel-name: "&c&lCancel Duel"
+  gui-cancel-lore: "&7Click to leave the queue"
+  gui-stats-name: "&e&lStatistics"
+  gui-stats-kills: "&7Kills: &a%kills%"
+  gui-stats-deaths: "&7Deaths: &c%deaths%"
+  gui-stats-kd: "&7K/D: &e%kd%"
+  gui-stats-tier: "&7Tier: %tier%"
+  gui-stats-progress: "&7Progress: &e%progress%/%needed% &7to %next%"
+  no-arena-setup: "&cNo arena is set up yet. Ask an admin to create one."
+  duel-start: "&7Duel vs &f%player% &8(%tier%&8) &7- good luck!"
+  fight-title: "&a&lSTART"
+  win: "&a&lVICTORY! &7You beat &f%player%&7."
+  win-title: "&a&lVICTORY!"
+  top-tier-subtitle: "&7You are at the top tier"
+  progress-title: "&e%progress%/%needed%"
+  progress-subtitle: "&7Victory! Next tier: %next%"
+  promotion-soon-subtitle: "&7Promotion to %next% &7in &e%time%s"
+  progress: "&7Progress to %next%&7: &e%progress%/%needed% &7wins"
+  promotion-soon: "&6&l%progress%/%needed%! &7You will be promoted to %next% &7in &e%time% seconds&7..."
+  promoted-title: "&6&lTIER UP!"
+  promoted-subtitle: "&7You are now %tier%"
+  promoted: "&6&lTIER UP! &7You are now %tier%&7!"
+  promoted-broadcast: "&6%player% &7reached %tier%&7!"
+  result-broadcast: "&f%winner% &7defeated &f%loser% &8(%tier%&8)"
+  lose: "&c&lDEFEAT! &7You lost to &f%player%&7."
+  lose-title: "&c&lDEFEAT"
+  lose-items: "&cYour items were dropped in the arena for your opponent."
+  loot-start: "&6You have &e%time% &6to take your opponent's items. Use &f/duel leave &6when you're done."
+  loot-actionbar: "&eLoot time left: &f%time% &8| &7/duel leave when done"
+  loot-over: "&7Loot time is over. Sending you back..."
+  loot-left: "&7You left the arena."
+  draw: "&eThe duel ended in a draw (%reason%)."
+  commands-blocked: "&cYou can't use that command during a duel."
+  leave-none: "&cYou are not in a duel."
+  arena-usage: "&cUsage: &f/duel arena <create|delete|setspawn|setpos|save|regen|list> <arena> ... &7(region: &f/duel wand&7)"
+  arena-created: "&aArena &f%arena% &acreated. Next: &f/duel arena setspawn %arena% 1&a/&f2 &a(stand at each spawn), then &f/duel wand &ato pick the region and &f/duel arena save %arena%&a."
+  arena-exists: "&cThat arena already exists."
+  arena-deleted: "&aArena &f%arena% &adeleted."
+  arena-missing: "&cThat arena does not exist."
+  spawn-set: "&aSpawn &f%spawn% &aof arena &f%arena% &aset."
+  spawn-usage: "&cUsage: &f/duel arena setspawn <arena> <1|2>"
+  wand-given: "&aYou got the arena wand. &7Left click = position 1, right click = position 2. Then run &f/duel arena save <arena>&7."
+  wand-name: "&6&lArena Wand"
+  wand-lore-1: "&7Left click: position 1"
+  wand-lore-2: "&7Right click: position 2"
+  wand-pos: "&aPosition &f%pos% &aset at &e%x%, %y%, %z%&a."
+  wand-region: "&7Region size: &e%blocks% blocks &8| &7Run &f/duel arena save <arena> &7to save it."
+  pos-usage: "&cUsage: &f/duel arena setpos <arena> <1|2> &7(look at a corner block)"
+  pos-set: "&aRegion corner &f%pos% &aof &f%arena% &aset at &e%x%, %y%, %z%&a. Run &f/duel arena save %arena% &aonce both corners are set."
+  arena-saved: "&aArena &f%arena% &asaved &8(&e%blocks% blocks&8)&a. It now regenerates after every duel."
+  arena-busy: "&cThat arena is in use right now."
+  region-missing: "&cSet both region corners first: &f/duel arena setpos %arena% 1 &cand &f2&c."
+  region-world: "&cBoth region corners must be in the same world."
+  arena-too-big: "&cThat region is too big (max %max% blocks)."
+  arena-save-failed: "&cCould not save the arena snapshot. Check the console."
+  arena-no-snapshot: "&cThat arena has no saved snapshot. Use &f/duel arena save %arena%&c."
+  arena-regen-started: "&aRegenerating arena &f%arena%&a..."
+  arena-list-header: "&bArenas:"
+  arena-list-line: "&7- &f%arena% &8(%status%&8) &8| %regen%"
+  arena-list-empty: "&cNo arenas yet."
+  reloaded: "&aTierDuels config reloaded."
+  tier-usage: "&cUsage: &f/tier set <player> <None|LT5|LT4|LT3|LT2|LT1>"
+  tier-invalid: "&cTier must be None, LT5, LT4, LT3, LT2 or LT1."
+  tier-info: "&b%player% &8| %tier% &8| &7Progress: &e%progress%/%needed% &8| &7Wins: &a%wins% &8| &7Losses: &c%losses%"
+  tier-info-max: "&b%player% &8| %tier% &8(&7top tier&8) &8| &7Wins: &a%wins% &8| &7Losses: &c%losses%"
+  tier-none: "&cNo stats for &f%player%&c."
+  tier-set: "&aSet &f%player% &ato %tier%&a."
+  tier-reset: "&aReset the tier of &f%player%&a."
+  top-header: "&b&lTop players"
+  top-line: "&e#%rank% %tier% &f%player% &8- &7%wins% wins"
+  top-empty: "&cNo duels have been played yet."
